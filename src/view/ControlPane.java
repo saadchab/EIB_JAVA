@@ -63,6 +63,7 @@ public class ControlPane extends Application {
 					public void handle(MouseEvent e) {
 						Sig.drawSignal(SignalType.NOISE) ;
 						Screen screen = new Screen() ;
+						g.getChildren().clear();
 						g.getChildren().add(screen.drawScreen(Sig.getSig())) ;
 						g.getChildren().add(createView(Sig)) ;
 					}
@@ -73,6 +74,7 @@ public class ControlPane extends Application {
 					public void handle(MouseEvent e) {
 						Sig.drawSignal(SignalType.SINE) ;
 						Screen screen = new Screen() ;
+						g.getChildren().clear();
 						g.getChildren().add(screen.drawScreen(Sig.getSig())) ;
 						g.getChildren().add(createView(Sig)) ;
 					}
@@ -83,6 +85,7 @@ public class ControlPane extends Application {
 					public void handle(MouseEvent e) {
 						Sig.drawSignal(SignalType.SQUARE) ;
 						Screen screen = new Screen() ;
+						g.getChildren().clear();
 						g.getChildren().add(screen.drawScreen(Sig.getSig())) ;
 						g.getChildren().add(createView(Sig)) ;
 					}

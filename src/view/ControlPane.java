@@ -136,10 +136,11 @@ public class ControlPane extends Application {
 	    labelM1.setText(Double.toString(mean)) ;
 	    labelV1.setText(Double.toString(variance)) ;
 		hbM.getChildren().addAll(labelM, labelM1) ;
+		hbM.setLayoutY(-30) ;
 		hbM.setSpacing(10) ;
 		g.getChildren().add(hbM) ;
 		hbV.getChildren().addAll(labelV, labelV1) ;
-		hbV.setLayoutY(-20) ;
+		hbV.setLayoutY(-50) ;
 		hbV.setSpacing(10) ;
 		g.getChildren().add(hbV) ;
 		 

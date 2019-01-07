@@ -43,23 +43,6 @@ public class Screen extends Application {
 		
 	}
 	
-	/*public static void addOrRemoveSignal(boolean choix) {
-		Button buttonAdd = new Button("Add") ;
-		Button buttonRemove = new Button("Remove") ;
-		if(choix) {
-			buttonAdd.setOnMouseClicked(
-				new EventHandler<MouseEvent >() {
-					public void handle(MouseEvent e) {
-						XYChart.Series series1 = new XYChart.Series() ;
-						lineChart.getData().add(series1) ;
-							
-					}
-			    }) ;
-		}
-		else if (!choix) {
-				
-		}
-		
-	}*/
+	
 	
 }

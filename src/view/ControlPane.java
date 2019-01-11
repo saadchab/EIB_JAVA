@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeException;
+import com.rapplogic.xbee.api.wpan.IoSample;
+import com.rapplogic.xbee.api.wpan.RxResponseIoSample;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -27,6 +29,8 @@ import javafx.stage.Stage;
 
 public class ControlPane extends Application {
 	
+	private static final String SERIAL_BAUDRATE = "115200";
+	private static final String SERIAL_COM = "COM3";
 	Button ButNoise = new Button("NOISE") ;
 	Button ButSine = new Button("SINE") ;
 	Button ButSquare = new Button("SQUARE") ;
@@ -100,24 +104,6 @@ public class ControlPane extends Application {
 					
 					}
 			    }) ;
-
-		/*Button button = new Button("Add Signal") ;
-		button.setOnMouseClicked(
-				new EventHandler<MouseEvent >() {
-					public void handle(MouseEvent e) {
-						Screen.addOrRemoveSignal(true) ;
-					}
-			    }) ;
-		
-		Button button1 = new Button("Remove Signal") ;
-		button1.setOnMouseClicked(
-				new EventHandler<MouseEvent >() {
-					public void handle(MouseEvent e) {
-						Screen.addOrRemoveSignal(false) ;
-					}
-			    }) ;*/
-		
-		//g.getChildren().add() ;
 		
 		return g ;
 	}
@@ -153,12 +139,12 @@ public class ControlPane extends Application {
 		Group g = new Group() ;
 		HBox hb1 = new HBox() ;
 		Label namePort = new Label("Port XBee") ;
-		TextField portXbee = new TextField() ;
+		TextField portXbee = new TextField(SERIAL_COM) ;
 		hb1.setSpacing(10) ;
 		hb1.getChildren().addAll(namePort, portXbee) ;
 		HBox hb2 = new HBox() ;
 		Label baud = new Label("Baudrate") ;
-		TextField baudT = new TextField() ;
+		TextField baudT = new TextField(SERIAL_BAUDRATE) ;
 		hb2.setSpacing(10) ;
 		hb2.setLayoutX(300) ;
 		hb2.getChildren().addAll(baud, baudT) ;
@@ -170,11 +156,24 @@ public class ControlPane extends Application {
 						XBee xbee  = new XBee() ;
 						try {
 							xbee.open(portXbee.getText(), Integer.parseInt(baudT.getText())) ;
+							System.out.println("XBee open ok") ;
 						} catch (NumberFormatException | XBeeException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					}
+						try {
+							while (true) {
+							    RxResponseIoSample response;
+							    response = (RxResponseIoSample) xbee.getResponse() ;
+								for(IoSample sample : response.getSamples())
+									System.out.println("sample is " + sample.getAnalog0()) ;
+							}
+						}
+						catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
 			    }) ;
 		
 		return g ;

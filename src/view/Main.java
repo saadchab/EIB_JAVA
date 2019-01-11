@@ -2,8 +2,6 @@ package view;
 
 import java.util.ArrayList;
 
-import com.rapplogic.xbee.api.XBee;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Signal;

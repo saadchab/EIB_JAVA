@@ -104,7 +104,10 @@ public class ControlPane extends Application {
 					
 					}
 			    }) ;
+<<<<<<< HEAD
 		
+=======
+>>>>>>> d7ffe1c91c1220d5196671baf5396ad23fa3f9e8
 		return g ;
 	}
 	

@@ -100,25 +100,6 @@ public class ControlPane extends Application {
 					
 					}
 			    }) ;
-
-		/*Button button = new Button("Add Signal") ;
-		button.setOnMouseClicked(
-				new EventHandler<MouseEvent >() {
-					public void handle(MouseEvent e) {
-						Screen.addOrRemoveSignal(true) ;
-					}
-			    }) ;
-		
-		Button button1 = new Button("Remove Signal") ;
-		button1.setOnMouseClicked(
-				new EventHandler<MouseEvent >() {
-					public void handle(MouseEvent e) {
-						Screen.addOrRemoveSignal(false) ;
-					}
-			    }) ;*/
-		
-		//g.getChildren().add() ;
-		
 		return g ;
 	}
 	

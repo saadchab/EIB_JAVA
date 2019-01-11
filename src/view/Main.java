@@ -1,11 +1,12 @@
 package view;
 
-import model.*;
-
 import java.util.ArrayList;
+
+import com.rapplogic.xbee.api.XBee;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.Signal;
 
 public class Main extends Application {
 
@@ -20,6 +21,7 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public static void main(String[] args) {

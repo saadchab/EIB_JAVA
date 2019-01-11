@@ -3,6 +3,9 @@ package view ;
 import model.* ;
 import java.util.ArrayList;
 
+import com.rapplogic.xbee.api.XBee;
+import com.rapplogic.xbee.api.XBeeException;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -34,7 +37,7 @@ public class ControlPane extends Application {
 			BorderPane panel = new BorderPane() ;
 			panel.setTop(createToolbar()) ;
 			panel.setCenter(createMainContent(Sig)) ;
-			//panel.setRight(createView(Sig));
+			panel.setRight(XBeeInterface());
 			Scene scene = new Scene(panel, 1600, 800) ;
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm()) ;
 			stage.setScene(scene) ;
@@ -97,8 +100,7 @@ public class ControlPane extends Application {
 					
 					}
 			    }) ;
-		
-		
+
 		/*Button button = new Button("Add Signal") ;
 		button.setOnMouseClicked(
 				new EventHandler<MouseEvent >() {
@@ -145,7 +147,37 @@ public class ControlPane extends Application {
 		g.getChildren().add(hbV) ;
 		 
 		return g ;
+	}
+	
+	private Node XBeeInterface() {
+		Group g = new Group() ;
+		HBox hb1 = new HBox() ;
+		Label namePort = new Label("Port XBee") ;
+		TextField portXbee = new TextField() ;
+		hb1.setSpacing(10) ;
+		hb1.getChildren().addAll(namePort, portXbee) ;
+		HBox hb2 = new HBox() ;
+		Label baud = new Label("Baudrate") ;
+		TextField baudT = new TextField() ;
+		hb2.setSpacing(10) ;
+		hb2.setLayoutX(300) ;
+		hb2.getChildren().addAll(baud, baudT) ;
+		g.getChildren().addAll(hb1, hb2) ;
 		
+		ButLoad.setOnMouseClicked(
+				new EventHandler<MouseEvent >() {
+					public void handle(MouseEvent e) {
+						XBee xbee  = new XBee() ;
+						try {
+							xbee.open(portXbee.getText(), Integer.parseInt(baudT.getText())) ;
+						} catch (NumberFormatException | XBeeException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+			    }) ;
+		
+		return g ;
 	}
 	
 

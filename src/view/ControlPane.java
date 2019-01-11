@@ -104,10 +104,6 @@ public class ControlPane extends Application {
 					
 					}
 			    }) ;
-<<<<<<< HEAD
-		
-=======
->>>>>>> d7ffe1c91c1220d5196671baf5396ad23fa3f9e8
 		return g ;
 	}
 	
@@ -156,26 +152,9 @@ public class ControlPane extends Application {
 		ButLoad.setOnMouseClicked(
 				new EventHandler<MouseEvent >() {
 					public void handle(MouseEvent e) {
-						XBee xbee  = new XBee() ;
-						try {
-							xbee.open(portXbee.getText(), Integer.parseInt(baudT.getText())) ;
-							System.out.println("XBee open ok") ;
-						} catch (NumberFormatException | XBeeException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						try {
-							while (true) {
-							    RxResponseIoSample response;
-							    response = (RxResponseIoSample) xbee.getResponse() ;
-								for(IoSample sample : response.getSamples())
-									System.out.println("sample is " + sample.getAnalog0()) ;
-							}
-						}
-						catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
+						XbeeCommunication xbeeCom = new XbeeCommunication() ;
+						XBee xbee = xbeeCom.XbeeConnect(portXbee, baudT) ;
+						xbeeCom.SamplefromXbee(xbee) ;
 						}
 			    }) ;
 		

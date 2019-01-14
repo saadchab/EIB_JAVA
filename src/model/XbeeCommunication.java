@@ -18,7 +18,7 @@ public class XbeeCommunication {
 	public void XbeeConnect(XBee xbee, ComboBox<String> portXbee, ComboBox<String> baudT) {
 		
 		try {
-			xbee.open(portXbee.getPromptText(), Integer.parseInt((String)baudT.getValue())) ;
+			xbee.open(portXbee.getValue(), Integer.parseInt((String)baudT.getValue())) ;
 			System.out.println("XBee open ok") ;
 		} catch (NumberFormatException | XBeeException e1) {
 			// TODO Auto-generated catch block
@@ -29,22 +29,15 @@ public class XbeeCommunication {
 	
 	public void SamplefromXbee(XBee xbee) {
 		try {
-			while (true) {
-			    RxResponseIoSample response;
-			    response = (RxResponseIoSample) xbee.getResponse() ;
-				for(IoSample sample : response.getSamples())
-					System.out.println("sample is " + sample.getAnalog0()) ;
-			}
+			RxResponseIoSample response;
+			response = (RxResponseIoSample) xbee.getResponse() ;
+			for(IoSample sample : response.getSamples())
+				System.out.println("sample is " + sample.getAnalog0()) ;
 		}
 		catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 		}
-		/*finally {
-			if (xbee != null && xbee.isConnected()) {
-				xbee.close();		
-			}
-		}*/
 	}
 	public int getConnect() {
 		return connect;

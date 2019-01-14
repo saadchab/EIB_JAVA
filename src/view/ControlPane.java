@@ -8,6 +8,7 @@ import com.rapplogic.xbee.api.XBeeException;
 import com.rapplogic.xbee.api.wpan.IoSample;
 import com.rapplogic.xbee.api.wpan.RxResponseIoSample;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -55,6 +56,19 @@ public class ControlPane extends Application {
 			stage.setScene(scene) ;
 			stage.setTitle("Oscilloscope") ;
 			stage.show() ;
+			new AnimationTimer() {
+	            @Override public void handle(long currentTime) {
+	            	if (xbeeCom.getConnect() == 1 && start == 1) {
+	            		panel.setCenter(AfficheXBee(xbee, xbeeCom)) ;
+	                }
+
+	                try {
+	                    Thread.sleep(100) ;
+	                } catch (InterruptedException e) {
+	                    // Do nothing
+	                }
+	            }
+	        }.start();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -208,16 +222,19 @@ public class ControlPane extends Application {
 					    g.getChildren().addAll(xbeeStart, c2) ;
 					}
 			    }) ;
-		
-		if (xbeeCom.getConnect() == 1 && start == 1) {	
-			xbeeCom.SamplefromXbee(xbee) ;
-			Screen screen = new Screen() ;
-			g.getChildren().clear();
-			g.getChildren().add(screen.drawXBeeData(test[i], i)) ;
-			i++ ;
-		}
-		
-		
+	
+		return g ;
+	}
+	
+	private Node AfficheXBee(XBee xbee, XbeeCommunication xbeeCom) {
+		Group g = new Group() ;
+        System.out.println("test") ;
+        xbeeCom.SamplefromXbee(xbee) ;
+		Screen screen = new Screen() ;
+		g.getChildren().clear();
+		g.getChildren().add(screen.drawXBeeData(test[i], i)) ;
+		System.out.println("test["+i+"]"+"="+test[i]) ;
+		i++ ;
 		return g ;
 	}
 	

@@ -39,8 +39,6 @@ public class Screen extends Application {
 	
 	Node drawXBeeData(int test, int i)  {
 		
-		//lineChart.getData().clear() ;
-		
 		series.getData().add(new XYChart.Data<Number, Number>(i, test)) ;
     
 	    lineChart.getData().add(series) ;

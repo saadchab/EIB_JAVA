@@ -10,16 +10,18 @@ import model.Signal;
 import model.XbeeCommunication;
 
 public class Main extends Application {
-
+	
+	static XbeeCommunication xbeeCom  = new XbeeCommunication() ;
+	static XBee xbee = new XBee() ;
+	static Signal Sig = new Signal() ;
+	
 	public void start(Stage primaryStage) {
 		try {
-			XbeeCommunication xbeeCom  = new XbeeCommunication() ;
-			Signal Sig = new Signal();
 			Sig.setFreq(880);
 			Sig.setFe(44100);
 			Sig.setNbEch(100);
 			ArrayList<Double> L = Sig.getSig();
-			ControlPane C = new ControlPane(primaryStage, Sig, xbeeCom);
+			ControlPane C = new ControlPane(primaryStage, Sig, xbee, xbeeCom);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
